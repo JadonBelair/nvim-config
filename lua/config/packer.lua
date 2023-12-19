@@ -48,6 +48,4 @@ return require('packer').startup(function(use)
 	use 'navarasu/onedark.nvim'
 
 	use 'simrat39/rust-tools.nvim'
-
-	use 'cohama/lexima.vim'
 end)
