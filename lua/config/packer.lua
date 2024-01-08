@@ -49,4 +49,10 @@ return require('packer').startup(function(use)
 	use 'navarasu/onedark.nvim'
 
 	use 'simrat39/rust-tools.nvim'
+
+	use {
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
+		requires = { {"nvim-lua/plenary.nvim"} }
+	}
 end)
