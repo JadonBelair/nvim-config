@@ -48,7 +48,12 @@ return require('packer').startup(function(use)
 
 	use 'navarasu/onedark.nvim'
 
-	use 'simrat39/rust-tools.nvim'
+	use {
+		'mrcjkb/rustaceanvim',
+		tag = '4.12.2'
+	}
+
+	use 'mfussenegger/nvim-dap'
 
 	use {
 		"ThePrimeagen/harpoon",

@@ -24,6 +24,8 @@ require('mason-lspconfig').setup({
 			local lua_opts = lsp_zero.nvim_lua_ls()
 			require('lspconfig').lua_ls.setup(lua_opts)
 		end,
+		-- let rustaceanvim handle the setup
+		rust_analyzer = lsp_zero.noop,
 	},
 })
 
@@ -59,21 +61,30 @@ lsp_zero.set_sign_icons({
 
 lsp_zero.setup()
 
-local rt = require('rust-tools')
-rt.setup({
+vim.g.rustaceanvim = {
 	server = {
-		capabilities = require("cmp_nvim_lsp").default_capabilities(),
-		on_attach = function(_, bufnr)
-			vim.keymap.set("n", "<Leader>k", rt.hover_actions.hover_actions, { buffer = bufnr })
-			vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+ 		capabilities = require("cmp_nvim_lsp").default_capabilities(),
+		cmd = function ()
+			local mason_registry = require('mason-registry')
+			local package = mason_registry.get_package('rust-analyzer')
+			local install_dir = package:get_install_path()
+			-- find out where the binary is in the install dir, and append it to the install dir
+			local ra_bin = install_dir .. '/' .. 'rust-analyzer.exe'
+			return { ra_bin }
 		end,
+ 		on_attach = function(_, bufnr)
+ 			vim.keymap.set("n", "<Leader>k", function () vim.cmd.RustLsp { 'hover', 'actions' } end, { buffer = bufnr })
+ 			vim.keymap.set("n", "<Leader>a", function () vim.cmd.RustLsp('codeAction') end, { buffer = bufnr })
+			-- requires neovim v0.10 or higher
+			vim.lsp.inlay_hint.enable(bufnr, true)
+ 		end,
 	},
 	tools = {
 		hover_actions = {
 			auto_focus = true
-		},
-	},
-})
+		}
+	}
+}
 
 vim.diagnostic.config({
 	virtual_text = true
