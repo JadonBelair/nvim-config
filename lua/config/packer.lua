@@ -53,6 +53,8 @@ return require('packer').startup(function(use)
 		tag = '4.12.2'
 	}
 
+	use 'folke/trouble.nvim'
+
 	use 'mfussenegger/nvim-dap'
 
 	use {
