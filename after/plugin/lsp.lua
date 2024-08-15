@@ -69,14 +69,14 @@ vim.g.rustaceanvim = {
 			local package = mason_registry.get_package('rust-analyzer')
 			local install_dir = package:get_install_path()
 			-- only works on windows, change to the correct file name on other platforms
-			local ra_bin = install_dir .. '/' .. 'rust-analyzer.exe'
+			local ra_bin = install_dir .. '/' .. 'rust-analyzer-x86_64-unknown-linux-gnu'
 			return { ra_bin }
 		end,
  		on_attach = function(_, bufnr)
  			vim.keymap.set("n", "<Leader>k", function () vim.cmd.RustLsp { 'hover', 'actions' } end, { buffer = bufnr })
  			vim.keymap.set("n", "<Leader>a", function () vim.cmd.RustLsp('codeAction') end, { buffer = bufnr })
 			-- requires neovim v0.10 or higher
-			vim.lsp.inlay_hint.enable(bufnr, true)
+			vim.lsp.inlay_hint.enable(true)
  		end,
 	},
 	tools = {

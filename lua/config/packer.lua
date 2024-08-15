@@ -50,7 +50,6 @@ return require('packer').startup(function(use)
 
 	use {
 		'mrcjkb/rustaceanvim',
-		tag = '4.12.2'
 	}
 
 	use 'folke/trouble.nvim'
