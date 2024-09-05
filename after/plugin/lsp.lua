@@ -7,8 +7,6 @@ lsp_zero.on_attach(function(client, bufnr)
 	vim.keymap.set("n", "<Leader>k", function() vim.lsp.buf.hover() end, opts)
 	vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
 	vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-	vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, opts)
-	vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, opts)
 	vim.keymap.set("n", "<leader>a", function() vim.lsp.buf.code_action() end, opts)
 	vim.keymap.set("n", "<leader>rr", function() vim.lsp.buf.references() end, opts)
 	vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
@@ -64,14 +62,6 @@ lsp_zero.setup()
 vim.g.rustaceanvim = {
 	server = {
  		capabilities = require("cmp_nvim_lsp").default_capabilities(),
-		cmd = function ()
-			local mason_registry = require('mason-registry')
-			local package = mason_registry.get_package('rust-analyzer')
-			local install_dir = package:get_install_path()
-			-- only works on windows, change to the correct file name on other platforms
-			local ra_bin = install_dir .. '/' .. 'rust-analyzer-x86_64-unknown-linux-gnu'
-			return { ra_bin }
-		end,
  		on_attach = function(_, bufnr)
  			vim.keymap.set("n", "<Leader>k", function () vim.cmd.RustLsp { 'hover', 'actions' } end, { buffer = bufnr })
  			vim.keymap.set("n", "<Leader>a", function () vim.cmd.RustLsp('codeAction') end, { buffer = bufnr })
