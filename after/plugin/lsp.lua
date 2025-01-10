@@ -24,6 +24,13 @@ require('mason-lspconfig').setup({
 		end,
 		-- let rustaceanvim handle the setup
 		rust_analyzer = lsp_zero.noop,
+		zls = function()
+			require('lspconfig').zls.setup({
+				settings = {
+					enable_build_on_save = true,
+				},
+			});
+		end
 	},
 })
 
