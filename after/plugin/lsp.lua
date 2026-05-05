@@ -34,6 +34,8 @@ require('mason-lspconfig').setup({
 	},
 })
 
+vim.lsp.enable("ocamllsp")
+
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
 

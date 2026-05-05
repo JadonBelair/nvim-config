@@ -47,9 +47,7 @@ return require('packer').startup(function(use)
 
 	use 'navarasu/onedark.nvim'
 
-	use {
-		'mrcjkb/rustaceanvim',
-	}
+	use 'mrcjkb/rustaceanvim'
 
 	use 'folke/trouble.nvim'
 
