@@ -27,15 +27,21 @@ vim.diagnostic.config({
 		}
 	}
 })
-
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+require("luasnip.loaders.from_vscode").lazy_load()
 cmp.setup({
+	snippet = {
+		expand = function (args)
+			require("luasnip").lsp_expand(args.body)
+		end
+	},
 	sources = {
 		{name = 'path'},
 		{name = 'nvim_lsp'},
+		{name = "luasnip" },
 	},
 	mapping = cmp.mapping.preset.insert({
 		['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
