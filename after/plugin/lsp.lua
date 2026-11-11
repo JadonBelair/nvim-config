@@ -86,6 +86,9 @@ vim.lsp.config("basedpyright", {
 })
 vim.lsp.enable("basedpyright")
 
+vim.lsp.config("clangd", { capabilities = capabilities })
+vim.lsp.enable("clangd")
+
 vim.g.rustaceanvim = {
 	server = {
  		capabilities = capabilities,
